@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  font-family: Arial, sans-serif;
+}
+
+.app-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(20, 40px);
+  grid-template-rows: repeat(500, 40px);
+  border: 2px solid black;
+  margin: 40px auto;
+  background-color: black;
+  width: fit-content;
+  box-sizing: content-box;
+  padding: 0; /* Yeni */
+}
+
+.grid-block {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border: 1px solid black;
+  box-sizing: border-box; /* Bu önemli */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.grid-block:hover {
+  background-color: #f0f0f0;
+}
+
+.grid-block.digging {
+  background-color: #ffe58a;
+}
+
+.grid-block.dug {
+  background-color: #d9f7be;
+}
+
+.dashboard {
+  margin: 20px auto;
+  text-align: center;
+  font-size: 18px;
+}
+
+.banner {
+  margin-bottom: 10px;
+}
+
+.info span {
+  display: inline-block;
+  margin: 0 10px;
+  font-weight: bold;
+}
