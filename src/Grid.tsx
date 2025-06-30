@@ -116,12 +116,12 @@ const Grid: React.FC<Props> = ({ username }) => {
           }}
         >
           <a
-            href="https://openai.com/chatgpt"
+            href="https://openai.com"
             target="_blank"
             rel="noopener noreferrer"
           >
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/4/4b/OpenAI_Logo.svg"
+              src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/logos/openai-wx0xqojo8lrv572wcvlcb.png/openai-twkvg10vdyltj9fklcgusg.png"
               alt="OpenAI"
               style={{
                 width: "728px",
@@ -177,9 +177,8 @@ const Grid: React.FC<Props> = ({ username }) => {
             key={index}
             className={`grid-block ${state}`}
             onClick={() => handleClick(index)}
-            title={`Blok #${index}${
-              blockData[index]?.dugBy ? ` – ${blockData[index]?.dugBy}` : ""
-            }`}
+            title={`Blok #${index}$
+              {blockData[index]?.dugBy ? ` – ${blockData[index]?.dugBy}` : ""}`}
             style={{
               pointerEvents: isMining && state === "idle" ? "none" : "auto",
             }}
