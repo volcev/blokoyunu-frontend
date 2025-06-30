@@ -105,23 +105,8 @@ const Grid: React.FC<Props> = ({ username }) => {
   return (
     <div>
       <div className="dashboard">
-        <div className="banner">
-          <a
-            href="https://properlite.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ display: "inline-block" }}
-          >
-            <img
-              src="/properlite-banner.svg"
-              alt="Properlite"
-              style={{
-                height: "40px",
-                margin: "10px auto",
-                display: "block",
-              }}
-            />
-          </a>
+        <div className="banner-placeholder">
+          {/* Banner alanı - şimdilik boş */}
         </div>
         <div className="info">
           <span>Kazılan Blok: {dugCount}</span>
