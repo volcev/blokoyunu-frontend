@@ -15,6 +15,8 @@ type BlockState = "idle" | "digging" | "dug";
 const TOTAL_BLOCKS = 100;
 const BLOCKS_PER_ROW = 10;
 
+const API_BASE = "https://blokoyunu-backend.onrender.com";
+
 const Grid: React.FC<Props> = ({ username }) => {
   const [blockStates, setBlockStates] = useState<BlockState[]>([]);
   const [blockData, setBlockData] = useState<Block[]>([]);
@@ -23,7 +25,7 @@ const Grid: React.FC<Props> = ({ username }) => {
 
   const fetchGrid = async () => {
     try {
-      const response = await fetch("http://localhost:3001/grid");
+      const response = await fetch(`${API_BASE}/grid`);
       const data: Block[] = await response.json();
 
       const newStates: BlockState[] = data.map((block) =>
@@ -53,7 +55,7 @@ const Grid: React.FC<Props> = ({ username }) => {
 
     setTimeout(async () => {
       try {
-        await fetch(`http://localhost:3001/grid/${index}`, {
+        await fetch(`${API_BASE}/grid/${index}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -72,13 +74,13 @@ const Grid: React.FC<Props> = ({ username }) => {
 
   const handleSell = async () => {
     try {
-      const response = await fetch("http://localhost:3001/grid");
+      const response = await fetch(`${API_BASE}/grid`);
       const data: Block[] = await response.json();
 
       const userBlocks = data.filter((block) => block.dugBy === username);
 
       for (const block of userBlocks) {
-        await fetch(`http://localhost:3001/grid/${block.index}`, {
+        await fetch(`${API_BASE}/grid/${block.index}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
