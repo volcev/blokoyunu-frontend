@@ -43,6 +43,8 @@ const Grid: React.FC<Props> = ({ username }) => {
 
   useEffect(() => {
     fetchGrid();
+    const interval = setInterval(fetchGrid, 5000);
+    return () => clearInterval(interval);
   }, [username]);
 
   const handleClick = async (index: number) => {
@@ -105,12 +107,31 @@ const Grid: React.FC<Props> = ({ username }) => {
   return (
     <div>
       <div className="dashboard">
-        <div className="banner" style={{ marginBottom: "15px", textAlign: "center" }}>
-          <a href="https://openai.com" target="_blank" rel="noopener noreferrer">
+        <div
+          className="banner"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "20px",
+          }}
+        >
+          <a
+            href="https://openai.com/chatgpt"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img
-              src="https://cdn.openai.com/public-assets/d/e0a89194eb/openai-avatar.png"
+              src="https://upload.wikimedia.org/wikipedia/commons/4/4b/OpenAI_Logo.svg"
               alt="OpenAI"
-              style={{ maxWidth: "728px", width: "100%", height: "90px", objectFit: "contain" }}
+              style={{
+                width: "728px",
+                height: "90px",
+                objectFit: "contain",
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                boxShadow: "0 0 10px rgba(0,0,0,0.2)",
+                padding: "8px",
+              }}
             />
           </a>
         </div>
@@ -142,6 +163,7 @@ const Grid: React.FC<Props> = ({ username }) => {
       </div>
 
       <h2>Hoş geldin {username}</h2>
+
       <div
         className="grid-container"
         style={{
@@ -155,7 +177,9 @@ const Grid: React.FC<Props> = ({ username }) => {
             key={index}
             className={`grid-block ${state}`}
             onClick={() => handleClick(index)}
-            title={`Blok #${index}${blockData[index]?.dugBy ? ` – ${blockData[index]?.dugBy}` : ""}`}
+            title={`Blok #${index}${
+              blockData[index]?.dugBy ? ` – ${blockData[index]?.dugBy}` : ""
+            }`}
             style={{
               pointerEvents: isMining && state === "idle" ? "none" : "auto",
             }}
