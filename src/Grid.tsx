@@ -55,13 +55,18 @@ const Grid: React.FC<Props> = ({ username }) => {
 
     setTimeout(async () => {
       try {
-        await fetch(`${API_BASE}/grid/${index}`, {
+        const response = await fetch(`${API_BASE}/grid/${index}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ dugBy: username }),
         });
+
+        if (!response.ok) {
+          const err = await response.json();
+          alert(err.error || "Kazı başarısız.");
+        }
 
         await fetchGrid();
       } catch (error) {
