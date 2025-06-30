@@ -9,21 +9,25 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const storedName = localStorage.getItem("username");
-    const storedColor = localStorage.getItem("userColor");
-    if (storedName) setUsername(storedName);
-    if (storedColor) setUserColor(storedColor);
+    if (storedName) {
+      setUsername(storedName);
+      const savedColor = localStorage.getItem(`color_${storedName}`);
+      if (savedColor) setUserColor(savedColor);
+    }
   }, []);
 
   const handleLogin = (name: string, color: string) => {
     localStorage.setItem("username", name);
-    localStorage.setItem("userColor", color);
+    localStorage.setItem(`color_${name}`, color);
     setUsername(name);
     setUserColor(color);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("username");
-    localStorage.removeItem("userColor");
+    if (username) {
+      localStorage.removeItem("username");
+      // Renk silinmez, kullanıcı geri gelirse aynı renkle devam eder
+    }
     setUsername(null);
     setUserColor(null);
   };

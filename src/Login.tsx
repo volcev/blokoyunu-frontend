@@ -16,12 +16,16 @@ const Login: React.FC<Props> = ({ onLogin }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const name = username.trim();
-    const color = selectedColor || colorOptions[Math.floor(Math.random() * colorOptions.length)];
     if (!name) return;
 
+    const storedColor = localStorage.getItem(`color_${name}`);
+    const color =
+      selectedColor || storedColor || colorOptions[Math.floor(Math.random() * colorOptions.length)];
+
     localStorage.setItem("username", name);
-    localStorage.setItem("userColor", color);
-    onLogin(name, color); // ← Buradaki tek değişiklik bu satır
+    localStorage.setItem(`color_${name}`, color);
+
+    onLogin(name, color);
   };
 
   return (
@@ -41,7 +45,7 @@ const Login: React.FC<Props> = ({ onLogin }) => {
       </form>
 
       <div style={{ marginTop: "20px" }}>
-        <p>Bir renk seçin:</p>
+        <p>Bir renk seçin (opsiyonel):</p>
         <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", gap: "10px" }}>
           {colorOptions.map((color) => (
             <div
