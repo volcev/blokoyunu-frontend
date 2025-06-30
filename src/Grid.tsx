@@ -3,6 +3,7 @@ import "./Grid.css";
 
 type Props = {
   username: string;
+  userColor: string;
 };
 
 type Block = {
@@ -17,30 +18,11 @@ const TOTAL_BLOCKS = 100;
 const BLOCKS_PER_ROW = 10;
 const API_BASE = "https://blokoyunu-backend.onrender.com";
 
-// Pastel renkler
-const COLOR_OPTIONS = [
-  "#FFB3BA", "#FFDFBA", "#FFFFBA", "#BAFFC9", "#BAE1FF",
-  "#E0BBE4", "#D5F4E6", "#C9C9FF", "#B5EAD7", "#FFDAC1",
-];
-
-const Grid: React.FC<Props> = ({ username }) => {
+const Grid: React.FC<Props> = ({ username, userColor }) => {
   const [blockStates, setBlockStates] = useState<BlockState[]>([]);
   const [blockData, setBlockData] = useState<Block[]>([]);
   const [isMining, setIsMining] = useState<boolean>(false);
   const [tokenBalance, setTokenBalance] = useState<number>(0);
-  const [userColor, setUserColor] = useState<string>(COLOR_OPTIONS[0]);
-
-  useEffect(() => {
-    // Kullanıcıya renk seçtir
-    const selected = window.prompt(
-      `Renk seç (0-${COLOR_OPTIONS.length - 1}):\n` +
-        COLOR_OPTIONS.map((c, i) => `${i}: ${c}`).join("\n")
-    );
-    const index = parseInt(selected || "0");
-    if (!isNaN(index) && COLOR_OPTIONS[index]) {
-      setUserColor(COLOR_OPTIONS[index]);
-    }
-  }, []);
 
   const fetchGrid = async () => {
     try {
@@ -177,6 +159,7 @@ const Grid: React.FC<Props> = ({ username }) => {
           display: "grid",
           gridTemplateColumns: `repeat(${BLOCKS_PER_ROW}, 40px)`,
           gridTemplateRows: `repeat(${TOTAL_BLOCKS / BLOCKS_PER_ROW}, 40px)`,
+          justifyContent: "center",
         }}
       >
         {blockStates.map((state, index) => {

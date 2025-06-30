@@ -8,12 +8,19 @@ body {
 .app-container {
   text-align: center;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .grid-container {
+  display: grid;
+  grid-template-columns: repeat(10, 40px);
+  grid-template-rows: repeat(10, 40px);
   gap: 4px;
   margin-top: 20px;
   user-select: none;
+  justify-content: center; /* Grid ortalanıyor */
 }
 
 .grid-block {

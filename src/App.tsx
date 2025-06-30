@@ -5,21 +5,33 @@ import "./App.css";
 
 const App: React.FC = () => {
   const [username, setUsername] = useState<string | null>(null);
+  const [userColor, setUserColor] = useState<string | null>(null);
 
   useEffect(() => {
-    const stored = localStorage.getItem("username");
-    if (stored) setUsername(stored);
+    const storedName = localStorage.getItem("username");
+    const storedColor = localStorage.getItem("userColor");
+    if (storedName) setUsername(storedName);
+    if (storedColor) setUserColor(storedColor);
   }, []);
+
+  const handleLogin = (name: string, color: string) => {
+    localStorage.setItem("username", name);
+    localStorage.setItem("userColor", color);
+    setUsername(name);
+    setUserColor(color);
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("username");
+    localStorage.removeItem("userColor");
     setUsername(null);
+    setUserColor(null);
   };
 
   return (
     <div className="app-container">
       <h1>⛏ Block Mining Game</h1>
-      {username ? (
+      {username && userColor ? (
         <>
           <button
             onClick={handleLogout}
@@ -37,10 +49,10 @@ const App: React.FC = () => {
           >
             Çıkış Yap
           </button>
-          <Grid username={username} />
+          <Grid username={username} userColor={userColor} />
         </>
       ) : (
-        <Login onLogin={setUsername} />
+        <Login onLogin={handleLogin} />
       )}
     </div>
   );
