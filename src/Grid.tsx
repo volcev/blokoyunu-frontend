@@ -75,7 +75,7 @@ const Grid: React.FC<Props> = ({ username, userColor }) => {
       }
 
       setIsMining(false);
-    }, 10000);
+    }, 1000);
   };
 
   const handleSell = async () => {
