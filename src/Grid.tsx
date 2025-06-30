@@ -107,12 +107,20 @@ const Grid: React.FC<Props> = ({ username }) => {
       <div className="dashboard">
         <div className="banner">
           <a
-            href="https://openai.com"
+            href="https://properlite.com"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: "white", textDecoration: "none" }}
+            style={{ display: "inline-block" }}
           >
-            🔥 Powered by OpenAI – Tıkla ve AI dünyasını keşfet!
+            <img
+              src="/properlite-banner.svg"
+              alt="Properlite"
+              style={{
+                height: "40px",
+                margin: "10px auto",
+                display: "block",
+              }}
+            />
           </a>
         </div>
         <div className="info">
