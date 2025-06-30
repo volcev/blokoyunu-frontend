@@ -43,6 +43,8 @@ const Grid: React.FC<Props> = ({ username }) => {
 
   useEffect(() => {
     fetchGrid();
+    const interval = setInterval(fetchGrid, 5000);
+    return () => clearInterval(interval);
   }, [username]);
 
   const handleClick = async (index: number) => {
@@ -105,16 +107,35 @@ const Grid: React.FC<Props> = ({ username }) => {
   return (
     <div>
       <div className="dashboard">
-        <div className="banner">
+        <div
+          className="banner"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "20px",
+          }}
+        >
           <a
-            href="https://openai.com"
+            href="https://openai.com/chatgpt"
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: "white", textDecoration: "none" }}
           >
-            🔥 Powered by OpenAI – Tıkla ve AI dünyasını keşfet!
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/4/4b/OpenAI_Logo.svg"
+              alt="OpenAI"
+              style={{
+                width: "728px",
+                height: "90px",
+                objectFit: "contain",
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                boxShadow: "0 0 10px rgba(0,0,0,0.2)",
+                padding: "8px",
+              }}
+            />
           </a>
         </div>
+
         <div className="info">
           <span>Kazılan Blok: {dugCount}</span>
           <span>Reklam Geliri: ${revenue}</span>
@@ -123,6 +144,7 @@ const Grid: React.FC<Props> = ({ username }) => {
             Senin Tokenların: {tokenBalance}
           </span>
         </div>
+
         <button
           onClick={handleSell}
           style={{
@@ -138,24 +160,10 @@ const Grid: React.FC<Props> = ({ username }) => {
         >
           Tokenları Sat 💸
         </button>
-        <button
-          onClick={fetchGrid}
-          style={{
-            marginLeft: "10px",
-            marginTop: "20px",
-            padding: "10px 20px",
-            fontWeight: "bold",
-            backgroundColor: "#1890ff",
-            color: "white",
-            border: "none",
-            borderRadius: "6px",
-            cursor: "pointer",
-          }}
-        >
-          🔄 Grid'i Yenile
-        </button>
       </div>
+
       <h2>Hoş geldin {username}</h2>
+
       <div
         className="grid-container"
         style={{
